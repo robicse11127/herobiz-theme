@@ -19,7 +19,7 @@ get_header();
                 // Start the loop.
                 while ( have_posts() ) :
                     the_post();
-                    get_template_part( 'template-parts/post/content' );
+                    get_template_part( 'template-parts/post/content', get_post_format() );
                 endwhile;
 
                 echo paginate_links( [
@@ -31,6 +31,8 @@ get_header();
             get_template_part( 'template-parts/page/content', 'none' );
         ?>
         <?php endif; ?>
+
+        <?php get_sidebar(); ?>
     </main>
 </div>
 

@@ -2,6 +2,7 @@
 /**
  * Template part for displaying posts.
  */
+
 ?>
 <article id="post-<?php the_ID() ?>">
     <header class="entry-header">
