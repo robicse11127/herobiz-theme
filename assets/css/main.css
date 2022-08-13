@@ -227,15 +227,19 @@ section {
   color: var(--color-primary);
   font-weight: 500;
 }
-.header .btn-getstarted, .header .btn-getstarted:focus {
+.header_menu_action li {
+  list-style: none;
   font-size: 16px;
-  color: var(--color-white);
   background: var(--color-primary);
   padding: 8px 23px;
   border-radius: 4px;
   transition: 0.3s;
+}
+.header_menu_action li a, .header_menu_action li a:focus {
+  color: var(--color-white);
   font-family: var(--font-secondary);
 }
+
 .header .btn-getstarted:hover, .header .btn-getstarted:focus:hover {
   color: var(--color-white);
   background: rgba(var(--color-primary-rgb), 0.85);

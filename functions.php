@@ -89,7 +89,10 @@ if ( ! function_exists( 'herobiz_setup' ) ) {
 		register_nav_menus( array(
 			'primary' => esc_html__( 'Primary', 'herobiz' ),
             'footer' => esc_html__( 'Footer Menu', 'herobiz' ),
+            'header_action' => esc_html__( 'Header Action', 'herobiz' ),
 		) );
+
+		add_filter( 'show_admin_bar', '__return_false' );
     }
 }
 add_action( 'after_setup_theme', 'herobiz_setup' );

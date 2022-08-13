@@ -14,14 +14,40 @@
         <header id="header" class="header fixed-top" data-scrollto-offset="0">
             <div class="container-fluid d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h1>HeroBiz<span>.</span></h1>
-            </a>
+            <?php
+                $custom_logo_id = get_theme_mod( 'custom_logo' );
+                $logo = wp_get_attachment_image_src( $custom_logo_id, 'full' );
 
+                if ( has_custom_logo() ) {
+                    printf(
+                        '<a href="%1$s" class="logo d-flex align-items-center scrollto me-auto me-lg-0"><img src="%2$s"/></a>',
+                        esc_url( home_url() ),
+                        esc_url( $logo[0] )
+                    );
+                } else {
+                    echo bloginfo( 'name' );
+                }
+
+            ?>
             <nav id="navbar" class="navbar">
-                <ul>
+                <?php
+                    if ( has_nav_menu( 'primary' ) ) :
+                        wp_nav_menu( [
+                            'theme_location' => 'primary',
+                            'container'      => false,
+                            'menu_class'     => '',
+                            'menu_id'        => '',
+                            'depth'          => 3
+                        ] );
+                    else :
+                        printf(
+                            '<a href="%1$s">%2$s</a>',
+                            esc_url( admin_url( '/nav-menus.php' ) ),
+                            esc_html__( 'Asign a menu', 'herobiz' )
+                        );
+                    endif;
+                ?>
+                <!-- <ul>
                 <li><a class="nav-link scrollto" href="index.html#hero">Home</a></li>
                 <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
                 <li><a class="nav-link scrollto" href="index.html#services">Services</a></li>
@@ -46,11 +72,27 @@
                     </ul>
                 </li>
                 <li><a class="nav-link scrollto" href="index.html#contact">Contact</a></li>
-                </ul>
+                </ul> -->
                 <i class="bi bi-list mobile-nav-toggle d-none"></i>
             </nav><!-- .navbar -->
 
-            <a class="btn-getstarted scrollto" href="index.html#about">Get Started</a>
+            <?php
+                if ( has_nav_menu( 'header_action' ) ) :
+                    wp_nav_menu( [
+                        'theme_location' => 'header_action',
+                        'container'      => false,
+                        'menu_class'     => 'header_menu_action',
+                        'menu_id'        => '',
+                        'depth'          => 3
+                    ] );
+                else :
+                    printf(
+                        '<a class="btn-getstarted scrollto" href="%1$s">%2$s</a>',
+                        esc_url( admin_url( '/nav-menus.php' ) ),
+                        esc_html__( 'Action Menu', 'herobiz' )
+                    );
+                endif;
+            ?>
 
             </div>
         </header><!-- End Header -->
